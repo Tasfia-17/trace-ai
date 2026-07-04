@@ -1,0 +1,37 @@
+{
+  "name": "Trace",
+  "version": "1.0.0",
+  "agentId": "trace",
+  "description": "Multi-agent bug-to-verified-patch system. Customer report → triage → visual analysis (Venice.ai TEE) → Playwright repro → constrained patch → GitHub PR. Designed for enterprise legacy modernization.",
+  "readme": "README.md",
+  "properties": {
+    "capability":   "bug-to-patch",
+    "domain":       "software-engineering",
+    "use_case":     "enterprise-legacy-modernization",
+    "hackathon":    "UK AI Agent Hackathon EP5 × Conduct"
+  },
+  "protocols": [
+    {
+      "name":        "TraceRunProtocol",
+      "version":     "1.0",
+      "description": "Run the full bug-to-patch workflow",
+      "endpoint":    "/api/trace/asi-one",
+      "method":      "POST",
+      "request_schema": {
+        "type":       "object",
+        "properties": {
+          "message":  { "type": "string" },
+          "provider": { "type": "string", "enum": ["openai", "cerebras", "gemini", "venice"] }
+        },
+        "required": ["message"]
+      }
+    },
+    {
+      "name":        "TraceAgentCardProtocol",
+      "version":     "1.0",
+      "description": "Get agent card and capabilities",
+      "endpoint":    "/api/trace/asi-one",
+      "method":      "GET"
+    }
+  ]
+}
